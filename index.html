@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name= "viewport" content= "width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Transaction Tracker</title>
+    <script type = "text/javascript" src = "js/transactiontracker.js"></script>
+    <script type = "text/javascript" src = "js/jquery-2.1.1.min.js"></script>
+    <link href = "style.css" rel = "stylesheet" type="text/css">
+</head>
+<body>
+    <div id = "error-display"></div>
+    <div id="cover"></div>
+    <div class="popup" id = "setup">
+        <h2>Welcome to Transaction Tracker!</h2>
+        <p>To get started, please enter your current bank balance to help Transaction Tracker keep an accurate record of your spending:</p>
+        <p><label for="setup-amount">Amount (£):</label>
+            <input type="text" id = "setup-amount"/></p>
+        <p><input type = "submit" value = "Submit" class = "button" id = "setup-submit" /></p>
+    </div>
+    <div class="popup" id = "settings">
+        <div><a href = "javascript:void(0)" id = "close-button">X</a><h2>Settings</h2></div>
+        <h3>Delete Stored Data</h3>
+        <p class = "red">WARNING: This will wipe ALL information stored in Transaction Tracker!</p>
+        <p><input type = "button" value = "Delete" class = "button-red" id = "factory-reset" /></p>
+    </div>
+    <div class = "header" id = "header">
+        <div id = "right-float">
+            <a href = "javascript:void(0)"><img src="img/settings.png" alt="Settings" id="settings-button"></a>
+        </div>
+        <img src = "img/main-logo.png" alt = "Transaction Tracker">
+    </div>
+
+    <div class = "transaction-box" id = "transaction-box">
+        <div id = "minimise-zone">
+            <form>
+                <div class="buttons-div">
+                    <label for="withdrawal" class = "transaction-selector">Withdrawal</label>
+                    <input type="radio" name="transaction-selector" id="withdrawal" value="withdrawal" onclick="displayWithdrawFields()" checked>
+                    <label for="deposit" class = "transaction-selector">Deposit</label>
+                    <input type="radio" name="transaction-selector" id="deposit" value="deposit" onclick="displayDepositFields()">
+                </div>
+            </form>
+
+            <div id="transaction-input-div">
+            <h2>Add Transaction</h2>
+                <div class = "input-row">
+                    <div class = "field-div-right">
+                        <label for="time">Time:</label>
+                        <select id = "time" tabindex="2"></select>
+                    </div>
+                    <div class = "field-div-left">
+                        <label for="date">Date:</label>
+                        <select id = "date" tabindex="1"></select>
+                        <select id = "month" tabindex="2"></select>
+                        <input type = "text" id = "year" tabindex="3" size="4" onchange="fillDates(monthField.selectedIndex, dateField, yearField.value)">
+                    </div>
+                </div>
+                <div class = "input-row">
+                    <div class = "field-div-right">
+                        <label for="payee">Payee:</label>
+                        <input type="text" id = "payee" tabindex="4">
+                    </div>
+                    <div class = "field-div-left">
+                        <label for="payment-type">Payment Type:</label>
+                        <select id = "payment-type" tabindex="3">
+                            <option value="Withdrawal">Withdrawal</option>
+                            <option value="Debit Card">Debit Card</option>
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="Online">Online</option>
+                            <option value="Cheque">Cheque</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                            <option value="Direct Debit">Direct Debit</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class = "field-div-right">
+                        <label for="amount">Amount (£):</label>
+                        <input type="text" id = "amount" tabindex="6">
+                    </div>
+                    <div class = "field-div-left">
+                        <label for="notes">Notes:</label>
+                        <input type="text" id = "notes" tabindex="5">
+                    </div>
+                </div>
+                <div class="input-row">
+                    <input type = "submit" value = "Submit" class = "button" id = "submit" tabindex="7" />
+                    <input type = "button" value = "Reset" class = "button" id = "reset" tabindex="8" />
+                </div>
+            </div>
+        </div>
+        <div><a href = "javascript:void(0)" id = "minimise-button"><img src="img/up.png" id = "minimise-img"></a></div>
+    </div>
+
+    <div class = "container">
+        <h2>Transaction History</h2>
+
+    <table id = "table"><tr><th></th><th>Date</th><th>Time</th><th>Payee</th><th>Transaction Type</th><th>Notes</th><th>Amount</th><th></th></tr>
+    </table>
+    </div>
+
+    <div id = "balance-display">
+        <div class = "balance-div" id = "final-balance-div">
+            <span class = "balance-title">Total:</span><br>
+            <span id = "final-balance">£0.00</span>
+        </div>
+        <div class = "balance-div" id = "current-balance-div">
+            <span class = "balance-title">Bank balance:</span><br>
+            <span id = "current-balance">£0.00</span>
+        </div>
+        <div class = "balance-div" id = "clearing-balance-div">
+            <span class = "balance-title">Payments pending:</span><br>
+            <span id = "clearing-balance">£0.00</span>
+        </div>
+    </div>
+
+</body>
+</html>
